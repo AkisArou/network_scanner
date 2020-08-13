@@ -41,14 +41,13 @@ class EmailSender():
         print(f"Sending e-mail to: {email_address}")
 
         try:
-            pass
             context = ssl.create_default_context()
             with smtplib.SMTP(providers[current_provider]["host"], providers[current_provider]["port"]) as server:
                 server.ehlo()  # Can be omitted
                 server.starttls(context=context)
                 server.ehlo()  # Can be omitted
                 server.login(email_address, password)
-                server.sendmail(email_address, EMAIL_TO, msg.as_string())
+                server.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
                 print("Email sent successfully")
         except Exception as e:
             print(e)
