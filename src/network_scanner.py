@@ -1,7 +1,6 @@
 import subprocess
 import os
 from system_util import SystemUtil
-from thread_job import ThreadJob
 
 class NetworkScanner:
     # Instance constants
