@@ -8,15 +8,13 @@ class Application():
     emailSender = EmailSender()
     network_scanner = NetworkScanner()
     arguments = None
-    final_interval = None
-        
+
 
     def initialize(self):
         self.arguments = self.argumentsParser.get_arguments()
-        self.final_interval = self.arguments.interval or 5
-        self.start_scanning()
+        self.start_scanning(self.arguments.interval or 5)
 
-    def start_scanning(self):
+    def start_scanning(self, interval: int):
         output = self.network_scanner.get_network_devices_output()
         print(output)
 
@@ -24,11 +22,11 @@ class Application():
             self.emailSender.send_email(self.arguments.testing, self.arguments.email, self.arguments.pw, output)
 
         if self.arguments.watch:
-            for x in range(1, self.final_interval):
-                b = f"  Next scan in: {self.final_interval - x} seconds"  + "." * x
+            for x in range(1, interval):
+                b = f"  Next scan in: {interval - x} seconds"  + "." * x
                 print (b, end="\r")
                 time.sleep(1)
-            self.start_scanning()        
+            self.start_scanning(interval)
 
 
 def main():
