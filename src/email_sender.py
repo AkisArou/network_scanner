@@ -9,9 +9,8 @@ from email.mime.multipart import MIMEMultipart
 class EmailSender():
     def send_email(self, testing: bool, email_address: str, password: str, message: str):
         if testing:
-            email_address = "mafalda63@ethereal.email"
-            password = "QRqWvMvvugwkkfMtCR"
-
+            return
+        
         EMAIL_TO = [email_address]
         EMAIL_FROM = email_address
         EMAIL_SUBJECT = "Network devices update."
